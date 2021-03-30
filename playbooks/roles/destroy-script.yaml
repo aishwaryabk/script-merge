@@ -1,0 +1,9 @@
+---
+
+- name: Destroy cluster
+  hosts: webhost
+  tasks:
+  - name: Destroy Powervs cluster
+    shell: .{{ dir_path }}/ocp-upi-powervs-pod/openshift-install-powervs destroy
+
+

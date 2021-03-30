@@ -1,0 +1,4 @@
+[webhost]
+#server1 ansible_host = <target machine for DU deployment> ansible_user = <Ansible user> ansible_connection = ssh
+localhost ansible_connection=local
+

@@ -1,0 +1,9 @@
+---
+
+- name: Install cluster
+  hosts: webhost
+  tasks:
+  - name: Install Powervs cluster
+    shell: .{{ dir_path }}/ocp-upi-powervs-pod/openshift-install-powervs create
+
+

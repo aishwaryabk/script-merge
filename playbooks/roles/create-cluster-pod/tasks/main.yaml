@@ -1,0 +1,19 @@
+---
+
+- name: Populate the deploy script 
+  shell: ".{{ dir_path }}/ocp-upi-powervs-pod/deploy.sh {{action }} {{ version }}"
+  register: NEW_CLUSTER
+  args:
+    chdir: "{{ dir_path }}/ocp-upi-powervs-pod" 
+   
+- name: Create pods, secret, pvc
+  shell: |
+    oc new-project $NEW_CLUSTER --description="OCP Cluster on PowerVS" \ 
+    --display-name="OCP on PowerVS - $NEW_CLUSTER"; \
+    oc create -f ./secret.yaml; \
+    oc create -f ./pvc.yaml; \
+    oc create -f ./ocp-cluster.yaml
+  args:
+    chdir: "{{ dir_path }}/ocp-upi-powervs-pod/clusters/{{ NEW_CLUSTER }}"
+
+#NEW_CLUSTER.stdout_lines 

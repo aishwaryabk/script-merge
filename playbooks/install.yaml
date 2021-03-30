@@ -1,0 +1,17 @@
+---
+
+- name: Setup Repository
+  hosts: webhosts
+  roles:
+  - repo-setup
+
+- name: Docker image
+  hosts: webhosts
+  roles:
+  - docker-img
+
+- name: Create cluster
+  hosts: webhosts
+  roles:
+  - script-install
+
