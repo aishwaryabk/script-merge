@@ -1,6 +1,6 @@
 
 #all variables
-dir_path: /home/cloudusr/aish/script-merge
+dir_path: 
 docker_image: quay.io/powercloud/ocp-upi-powervs-pod
-version: 4.6
+version: 
 action:   #apply/destroy

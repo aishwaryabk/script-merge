@@ -1,28 +1,24 @@
 ---
 
-- name: Task to setup prerequisites
-  hosts: webhost
+- name: Clone ocp-upi-powervs-pod repository
+  git:
+    repo: "https://github.com/ocp-power-automation/ocp-upi-powervs-pod"
+    dest: "{{ dir_path }}/ocp-upi-powervs-pod"
+    version: main
+#  become_user: cloudusr
 
-  tasks:
-  - name: Clone ocp-upi-powervs-pod repository
-    git:
-      repo: "https://github.com/ocp-power-automation/ocp-upi-powervs-pod"
-      dest: "{{ dir_path }}/ocp-upi-powervs-pod"
-      version: main
-  #  become_user: cloudusr
+- name: Download the openshift script
+  shell: "curl -sL https://raw.githubusercontent.com/ocp-power-automation/openshift-install-power/master/openshift-install-powervs -o {{ dir_path }}/ocp-upi-powervs-pod/openshift-install-powervs"
 
-  - name: Download the openshift script
-    shell: "curl -sL https://raw.githubusercontent.com/ocp-power-automation/openshift-install-power/master/openshift-install-powervs -o {{ dir_path }}/ocp-upi-powervs-pod/openshift-install-powervs"
+- name: permission to script
+  file: dest="{{ dir_path }}/ocp-upi-powervs-pod/openshift-install-powervs" mode=+x
 
-  - name: permission to script
-    file: dest="{{ dir_path }}/ocp-upi-powervs-pod/openshift-install-powervs mode=+x"
+- name: Execute the script setup
+  shell: "cd {{ dir_path }}/ocp-upi-powervs-pod/ && ./openshift-install-powervs setup"
 
-  - name: Execute the script setup
-    shell: ".{{ dir_path }}/ocp-upi-powervs-pod/openshift-install-powervs setup"
-
-  - name: export executables to PATH
-    shell: echo $PATH
-    environment:
-      PATH: "$PATH:{{ dir_path }}/ocp-upi-powervs-pod"
+- name: export executables to PATH
+  shell: echo $PATH
+  environment:
+    PATH: "$PATH:{{ dir_path }}/ocp-upi-powervs-pod"
 
 

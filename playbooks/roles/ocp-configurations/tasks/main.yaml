@@ -2,27 +2,27 @@
 
 - name: To check if pull-secrets exists
   stat:
-    path: "{{ dir-path }}/pull-secret.txt"
+    path: "{{ dir_path }}/pull-secret.txt"
   register: secret_file
    
 - name: hard link the pull-secret file
   file:
-    src: "{{ dir-path }}/pull-secret.txt"
-    dest: "{{ dir-path }}//ocp-upi-powervs-pod/pull-secret.txt"
+    src: "{{ dir_path }}/pull-secret.txt"
+    dest: "{{ dir_path }}//ocp-upi-powervs-pod/pull-secret.txt"
     state: hard
   when: secret_file.stat.exists
     
 - name: To check if var file exists
   stat:
-    path: "{{ dir-path }}/var.tfvars"
-  #  path: "{{ dir-path }}/ocp-variables"
+    path: "{{ dir_path }}/var.tfvars"
+  #  path: "{{ dir_path }}/ocp-variables"
   register: variable_file 
     
 - name: hard link the variables file file
   file:
-    src: "{{ dir-path }}/var.tfvars"
-    dest: "{{ dir-path }}//ocp-upi-powervs-pod/var.tfvars"
+    src: "{{ dir_path }}/var.tfvars"
+    dest: "{{ dir_path }}//ocp-upi-powervs-pod/var.tfvars"
     state: hard
   when: variable_file.stat.exists
 
-- name: Map var.tfvars to ocp-variables
+#- name: Map var.tfvars to ocp-variables

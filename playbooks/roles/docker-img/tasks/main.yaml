@@ -1,13 +1,10 @@
 ---
 
-- name: Docker image
-  hosts: webhost
-  tasks:
-  - name: Build the image
-    docker_image:
-      path: "{{ dir_path }}/ocp-upi-powervs-pod/dockerfile/"
-      name: "{{ docker_image }}"
-      tag: "ocp-{{ version }}"
-      state: present
+- name: Build the image
+  docker_image:
+    path: "{{ dir_path }}/ocp-upi-powervs-pod/dockerfile/"
+    name: "{{ docker_image }}"
+    tag: "ocp-{{ version }}"
+    state: present
 
 

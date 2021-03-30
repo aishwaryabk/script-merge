@@ -1,17 +1,22 @@
 ---
 
 - name: Setup Repository
-  hosts: webhosts
+  hosts: webhost
   roles:
   - repo-setup
 
 - name: Docker image
-  hosts: webhosts
+  hosts: webhost
   roles:
   - docker-img
 
+- name: Docker image
+  hosts: webhost
+  roles:
+  - ocp-configurations
+
 - name: Create cluster
-  hosts: webhosts
+  hosts: webhost
   roles:
   - script-install
 
