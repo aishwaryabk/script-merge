@@ -21,7 +21,7 @@
 - name: hard link the variables file file
   file:
     src: "{{ dir_path }}/var.tfvars"
-    dest: "{{ dir_path }}//ocp-upi-powervs-pod/var.tfvars"
+    dest: "{{ dir_path }}/ocp-upi-powervs-pod/var.tfvars"
     state: hard
   when: variable_file.stat.exists
 
